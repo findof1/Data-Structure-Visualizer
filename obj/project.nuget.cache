@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "BtrwIROcihw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lucas\\OneDrive\\Desktop\\Coding\\C#\\SFMLTest\\SFMLTest.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lucas\\.nuget\\packages\\csfml\\2.5.2\\csfml.2.5.2.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\sfml.audio\\2.5.1\\sfml.audio.2.5.1.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\sfml.graphics\\2.5.1\\sfml.graphics.2.5.1.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\sfml.net\\2.5.1\\sfml.net.2.5.1.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\sfml.system\\2.5.1\\sfml.system.2.5.1.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\sfml.window\\2.5.1\\sfml.window.2.5.1.nupkg.sha512"
+  ],
+  "logs": []
+}
