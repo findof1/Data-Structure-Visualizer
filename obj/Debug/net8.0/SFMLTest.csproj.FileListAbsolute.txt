@@ -186,3 +186,4 @@ C:\Users\lucas\OneDrive\Desktop\Coding\C#\SFMLTest\obj\Debug\net8.0\refint\SFMLT
 C:\Users\lucas\OneDrive\Desktop\Coding\C#\SFMLTest\obj\Debug\net8.0\SFMLTest.pdb
 C:\Users\lucas\OneDrive\Desktop\Coding\C#\SFMLTest\obj\Debug\net8.0\SFMLTest.genruntimeconfig.cache
 C:\Users\lucas\OneDrive\Desktop\Coding\C#\SFMLTest\obj\Debug\net8.0\ref\SFMLTest.dll
+C:\Users\lucas\OneDrive\Desktop\Coding\C#\SFMLTest\obj\Debug\net8.0\SFMLTest.sourcelink.json

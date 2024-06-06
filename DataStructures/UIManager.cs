@@ -5,6 +5,7 @@ using StackManagerNS;
 using QueueManagerNS;
 using LinkedListManagerNS;
 using TextBoxNS;
+using StaticArrayManagerNS;
 
 namespace UIManagerNS
 {
@@ -26,6 +27,8 @@ namespace UIManagerNS
 
     public bool IsLinkedListButtonActive => _activeButton == "linkedListBtn";
 
+    public bool IsStaticArrayButtonActive => _activeButton == "staticArrayBtn";
+
     public UIManager(Font font, uint width, Window window)
     {
       _font = font;
@@ -41,19 +44,22 @@ namespace UIManagerNS
 
     private void CreateButtons()
     {
-      AddButton("Stack", new Vector2f(5, 5));
-      AddButton("Push", new Vector2f(5, 85));
-      AddButton("Pop", new Vector2f(5, 165));
-      AddButton("Queue", new Vector2f(315, 5));
-      AddButton("Enqueue", new Vector2f(315, 85));
-      AddButton("Dequeue", new Vector2f(315, 165));
-      AddButton("Linked List", new Vector2f(625, 5));
-      AddButton("Add \nFirst", new Vector2f(625, 85), 145);
-      AddButton("Remove \nFirst", new Vector2f(625, 165), 145);
-      AddButton("Add \nLast", new Vector2f(780, 85), 145);
-      AddButton("Remove \nLast", new Vector2f(780, 165), 145);
-      AddButton("Add \nAfter", new Vector2f(625, 245), 145);
-      AddButton("Remove \nAfter", new Vector2f(780, 245), 145);
+      AddButton("Stack", new Vector2f(5, 5));                    //0
+      AddButton("Push", new Vector2f(5, 85));                    //1
+      AddButton("Pop", new Vector2f(5, 165));                    //2
+      AddButton("Queue", new Vector2f(315, 5));                  //3
+      AddButton("Enqueue", new Vector2f(315, 85));               //4
+      AddButton("Dequeue", new Vector2f(315, 165));              //5
+      AddButton("Linked List", new Vector2f(625, 5));            //6
+      AddButton("Add \nFirst", new Vector2f(625, 85), 145);      //7
+      AddButton("Remove \nFirst", new Vector2f(625, 165), 145);  //8
+      AddButton("Add \nLast", new Vector2f(780, 85), 145);       //9
+      AddButton("Remove \nLast", new Vector2f(780, 165), 145);   //10
+      AddButton("Add \nAfter", new Vector2f(625, 245), 145);     //11
+      AddButton("Remove \nAfter", new Vector2f(780, 245), 145);  //12
+      AddButton("Static Array", new Vector2f(935, 5));           //13
+      AddButton("Add Last Element", new Vector2f(935, 85));      //14
+      AddButton("Remove Last Element", new Vector2f(935, 165));  //15
     }
 
     private void CreateTextBoxes()
@@ -80,7 +86,7 @@ namespace UIManagerNS
       _buttonTexts.Add(buttonText);
     }
 
-    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager)
+    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager)
     {
       if (Mouse.IsButtonPressed(Mouse.Button.Left))
       {
@@ -102,6 +108,10 @@ namespace UIManagerNS
           if (_buttons[6].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
           {
             _activeButton = _activeButton != "linkedListBtn" ? "linkedListBtn" : "";
+          }
+          else if (_buttons[13].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+          {
+            _activeButton = _activeButton != "staticArrayBtn" ? "staticArrayBtn" : "";
           }
           else
 
@@ -168,10 +178,23 @@ namespace UIManagerNS
               linkedListManager.RemoveAfterLinkedListItem(_textBoxes[0].getText());
             }
           }
+          else if (_activeButton == "staticArrayBtn")
+          {
+            if (_buttons[14].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              staticArrayManager.AddElement();
+            }
+            else
+           if (_buttons[15].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              staticArrayManager.RemoveElement();
+            }
+          }
         }
         _buttons[0].FillColor = _activeButton == "stackBtn" ? Color.Green : Color.White;
         _buttons[3].FillColor = _activeButton == "queueBtn" ? Color.Green : Color.White;
         _buttons[6].FillColor = _activeButton == "linkedListBtn" ? Color.Green : Color.White;
+        _buttons[13].FillColor = _activeButton == "staticArrayBtn" ? Color.Green : Color.White;
         _mouseDown = true;
       }
       else
@@ -201,6 +224,13 @@ namespace UIManagerNS
         else if (_buttons[7] == button || _buttons[8] == button || _buttons[9] == button || _buttons[10] == button || _buttons[11] == button || _buttons[12] == button)
         {
           if (_activeButton == "linkedListBtn")
+          {
+            window.Draw(button);
+          }
+        }
+        else if (_buttons[14] == button || _buttons[15] == button)
+        {
+          if (_activeButton == "staticArrayBtn")
           {
             window.Draw(button);
           }

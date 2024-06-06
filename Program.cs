@@ -4,6 +4,7 @@ using UIManagerNS;
 using StackManagerNS;
 using QueueManagerNS;
 using LinkedListManagerNS;
+using StaticArrayManagerNS;
 
 namespace SFMLNetExample
 {
@@ -25,18 +26,21 @@ namespace SFMLNetExample
 
       var linkedListManager = new LinkedListManager(font, width);
 
+      var staticArrayManager = new StaticArrayManager(font, width);
+
       window.Closed += (sender, e) => window.Close();
 
       while (window.IsOpen)
       {
         window.DispatchEvents();
-        uiManager.HandleInput(window, stackManager, queueManager, linkedListManager);
+        uiManager.HandleInput(window, stackManager, queueManager, linkedListManager, staticArrayManager);
         window.Clear(Color.Black);
         linkedListManager.DrawArrows(window, uiManager.IsLinkedListButtonActive);
         uiManager.Draw(window);
         stackManager.Draw(window, uiManager.IsStackButtonActive);
         queueManager.Draw(window, uiManager.IsQueueButtonActive);
         linkedListManager.Draw(window, uiManager.IsLinkedListButtonActive);
+        staticArrayManager.Draw(window, uiManager.IsStaticArrayButtonActive);
 
         window.Display();
       }
