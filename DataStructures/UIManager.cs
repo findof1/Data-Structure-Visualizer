@@ -6,6 +6,7 @@ using QueueManagerNS;
 using LinkedListManagerNS;
 using TextBoxNS;
 using StaticArrayManagerNS;
+using DynamicArrayManagerNS;
 
 namespace UIManagerNS
 {
@@ -21,6 +22,8 @@ namespace UIManagerNS
     private string? _activeButton;
     private bool _mouseDown;
 
+    private int screen = 1;
+
     public bool IsStackButtonActive => _activeButton == "stackBtn";
 
     public bool IsQueueButtonActive => _activeButton == "queueBtn";
@@ -28,6 +31,8 @@ namespace UIManagerNS
     public bool IsLinkedListButtonActive => _activeButton == "linkedListBtn";
 
     public bool IsStaticArrayButtonActive => _activeButton == "staticArrayBtn";
+
+    public bool IsDynamicArrayButtonActive => _activeButton == "dynamicArrayBtn";
 
     public UIManager(Font font, uint width, Window window)
     {
@@ -58,8 +63,13 @@ namespace UIManagerNS
       AddButton("Add \nAfter", new Vector2f(625, 245), 145);     //11
       AddButton("Remove \nAfter", new Vector2f(780, 245), 145);  //12
       AddButton("Static Array", new Vector2f(935, 5));           //13
-      AddButton("Add Last Element", new Vector2f(935, 85));      //14
-      AddButton("Remove Last Element", new Vector2f(935, 165));  //15
+      AddButton("Add Element", new Vector2f(935, 85));           //14
+      AddButton("Remove Element", new Vector2f(935, 165));       //15
+      AddButton("Dynamic Array", new Vector2f(1245, 5));         //16
+      AddButton("Add Element", new Vector2f(1245, 85));          //17
+      AddButton("Remove Element", new Vector2f(1245, 165));      //18
+      AddButton(">", new Vector2f(1555, 5));                     //19
+      AddButton("<", new Vector2f(1555, 5));                     //20
     }
 
     private void CreateTextBoxes()
@@ -86,115 +96,150 @@ namespace UIManagerNS
       _buttonTexts.Add(buttonText);
     }
 
-    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager)
+    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager, DynamicArrayManager dynamicArrayManager)
     {
       if (Mouse.IsButtonPressed(Mouse.Button.Left))
       {
         Vector2f mousePos = window.MapPixelToCoords(Mouse.GetPosition(window));
-        if (!_mouseDown)
+        if (screen == 1)
         {
-          if (_buttons[0].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+          if (!_mouseDown)
           {
-            _activeButton = _activeButton != "stackBtn" ? "stackBtn" : "";
+            if (_buttons[0].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              _activeButton = _activeButton != "stackBtn" ? "stackBtn" : "";
+            }
+            else
+
+            if (_buttons[3].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              _activeButton = _activeButton != "queueBtn" ? "queueBtn" : "";
+            }
+            else
+
+            if (_buttons[6].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              _activeButton = _activeButton != "linkedListBtn" ? "linkedListBtn" : "";
+            }
+            else if (_buttons[13].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              _activeButton = _activeButton != "staticArrayBtn" ? "staticArrayBtn" : "";
+            }
+            else
+            if (_buttons[16].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              _activeButton = _activeButton != "dynamicArrayBtn" ? "dynamicArrayBtn" : "";
+            }
+            else
+            if (_buttons[19].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              screen++;
+            }
+            else
+            if (_activeButton == "stackBtn")
+            {
+              if (_buttons[1].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                stackManager.AddStack();
+              }
+              else
+
+              if (_buttons[2].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                stackManager.RemoveStack();
+              }
+            }
+            else
+            if (_activeButton == "queueBtn")
+            {
+              if (_buttons[4].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                queueManager.AddQueueItem();
+              }
+              else
+
+              if (_buttons[5].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                queueManager.RemoveQueueItem();
+              }
+            }
+            else
+            if (_activeButton == "linkedListBtn")
+            {
+              if (_buttons[7].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                linkedListManager.AddFirstLinkedListItem();
+              }
+              else
+
+              if (_buttons[8].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                linkedListManager.RemoveFirstLinkedListItem();
+              }
+              else
+
+              if (_buttons[9].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                linkedListManager.AddLastLinkedListItem();
+              }
+              else
+              if (_buttons[10].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                linkedListManager.RemoveLastLinkedListItem();
+              }
+              else
+
+              if (_buttons[11].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                linkedListManager.AddAfterLinkedListItem(_textBoxes[0].getText());
+              }
+              else
+              if (_buttons[12].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                linkedListManager.RemoveAfterLinkedListItem(_textBoxes[0].getText());
+              }
+            }
+            else if (_activeButton == "staticArrayBtn")
+            {
+              if (_buttons[14].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                staticArrayManager.AddElement();
+              }
+              else
+             if (_buttons[15].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                staticArrayManager.RemoveElement();
+              }
+            }
+            else if (_activeButton == "dynamicArrayBtn")
+            {
+              if (_buttons[17].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                dynamicArrayManager.AddElement();
+              }
+              else
+             if (_buttons[18].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                dynamicArrayManager.RemoveElement();
+              }
+            }
           }
-          else
-
-          if (_buttons[3].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+          _buttons[0].FillColor = _activeButton == "stackBtn" ? Color.Green : Color.White;
+          _buttons[3].FillColor = _activeButton == "queueBtn" ? Color.Green : Color.White;
+          _buttons[6].FillColor = _activeButton == "linkedListBtn" ? Color.Green : Color.White;
+          _buttons[13].FillColor = _activeButton == "staticArrayBtn" ? Color.Green : Color.White;
+          _buttons[16].FillColor = _activeButton == "dynamicArrayBtn" ? Color.Green : Color.White;
+        }
+        else if (screen == 2)
+        {
+          if (!_mouseDown)
           {
-            _activeButton = _activeButton != "queueBtn" ? "queueBtn" : "";
-          }
-          else
-
-          if (_buttons[6].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-          {
-            _activeButton = _activeButton != "linkedListBtn" ? "linkedListBtn" : "";
-          }
-          else if (_buttons[13].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-          {
-            _activeButton = _activeButton != "staticArrayBtn" ? "staticArrayBtn" : "";
-          }
-          else
-
-          if (_activeButton == "stackBtn")
-          {
-            if (_buttons[1].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            if (_buttons[20].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
             {
-              stackManager.AddStack();
-            }
-            else
-
-            if (_buttons[2].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              stackManager.RemoveStack();
-            }
-          }
-          else
-          if (_activeButton == "queueBtn")
-          {
-            if (_buttons[4].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              queueManager.AddQueueItem();
-            }
-            else
-
-            if (_buttons[5].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              queueManager.RemoveQueueItem();
-            }
-          }
-          else
-          if (_activeButton == "linkedListBtn")
-          {
-            if (_buttons[7].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              linkedListManager.AddFirstLinkedListItem();
-            }
-            else
-
-            if (_buttons[8].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              linkedListManager.RemoveFirstLinkedListItem();
-            }
-            else
-
-            if (_buttons[9].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              linkedListManager.AddLastLinkedListItem();
-            }
-            else
-            if (_buttons[10].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              linkedListManager.RemoveLastLinkedListItem();
-            }
-            else
-
-            if (_buttons[11].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              linkedListManager.AddAfterLinkedListItem(_textBoxes[0].getText());
-            }
-            else
-            if (_buttons[12].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              linkedListManager.RemoveAfterLinkedListItem(_textBoxes[0].getText());
-            }
-          }
-          else if (_activeButton == "staticArrayBtn")
-          {
-            if (_buttons[14].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              staticArrayManager.AddElement();
-            }
-            else
-           if (_buttons[15].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              staticArrayManager.RemoveElement();
+              screen--;
             }
           }
         }
-        _buttons[0].FillColor = _activeButton == "stackBtn" ? Color.Green : Color.White;
-        _buttons[3].FillColor = _activeButton == "queueBtn" ? Color.Green : Color.White;
-        _buttons[6].FillColor = _activeButton == "linkedListBtn" ? Color.Green : Color.White;
-        _buttons[13].FillColor = _activeButton == "staticArrayBtn" ? Color.Green : Color.White;
         _mouseDown = true;
       }
       else
@@ -205,57 +250,83 @@ namespace UIManagerNS
 
     public void Draw(RenderWindow window)
     {
+      DrawButtons(window);
+      DrawButtonTexts(window);
+      DrawTextBoxes(window);
+    }
+
+    private void DrawButtons(RenderWindow window)
+    {
       foreach (var button in _buttons)
       {
-        if (_buttons[1] == button || _buttons[2] == button)
-        {
-          if (_activeButton == "stackBtn")
-          {
-            window.Draw(button);
-          }
-        }
-        else if (_buttons[4] == button || _buttons[5] == button)
-        {
-          if (_activeButton == "queueBtn")
-          {
-            window.Draw(button);
-          }
-        }
-        else if (_buttons[7] == button || _buttons[8] == button || _buttons[9] == button || _buttons[10] == button || _buttons[11] == button || _buttons[12] == button)
-        {
-          if (_activeButton == "linkedListBtn")
-          {
-            window.Draw(button);
-          }
-        }
-        else if (_buttons[14] == button || _buttons[15] == button)
-        {
-          if (_activeButton == "staticArrayBtn")
-          {
-            window.Draw(button);
-          }
-        }
-        else
+        if (ShouldDraw(button, _buttons.Cast<Drawable>().ToList()))
         {
           window.Draw(button);
         }
       }
+    }
 
-      foreach (var text in _buttonTexts)
+    private bool ShouldDraw(Drawable item, List<Drawable> drawables)
+    {
+      if (screen == 1)
       {
-        window.Draw(text);
+        if (item == drawables[0] || item == drawables[3] || item == drawables[6] || item == drawables[13] || item == drawables[16] || item == drawables[19])
+        {
+          return true;
+        }
+
+        if (_activeButton == "stackBtn" && (item == drawables[1] || item == drawables[2]))
+        {
+          return true;
+        }
+
+        if (_activeButton == "queueBtn" && (item == drawables[4] || item == drawables[5]))
+        {
+          return true;
+        }
+
+        if (_activeButton == "linkedListBtn" && (item == drawables[7] || item == drawables[8] || item == drawables[9] || item == drawables[10] || item == drawables[11] || item == drawables[12]))
+        {
+          return true;
+        }
+
+        if (_activeButton == "staticArrayBtn" && (item == drawables[14] || item == drawables[15]))
+        {
+          return true;
+        }
+
+        if (_activeButton == "dynamicArrayBtn" && (item == drawables[17] || item == drawables[18]))
+        {
+          return true;
+        }
+      }
+      else if (screen == 2)
+      {
+        if (item == drawables[20])
+        {
+          return true;
+        }
       }
 
+      return false;
+    }
+
+    private void DrawButtonTexts(RenderWindow window)
+    {
+      foreach (var text in _buttonTexts)
+      {
+        if (ShouldDraw(text, _buttonTexts))
+        {
+          window.Draw(text);
+        }
+      }
+    }
+
+    private void DrawTextBoxes(RenderWindow window)
+    {
       foreach (TextBox textBox in _textBoxes ?? Enumerable.Empty<TextBox>())
       {
-        if (_textBoxes?[0] == textBox)
-        {
-          if (_activeButton == "linkedListBtn")
-          {
-            textBox.Draw(window);
-          }
-        }
-        else
+        if (_activeButton == "linkedListBtn" && _textBoxes?[0] == textBox)
         {
           textBox.Draw(window);
         }
