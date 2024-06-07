@@ -7,6 +7,7 @@ using LinkedListManagerNS;
 using TextBoxNS;
 using StaticArrayManagerNS;
 using DynamicArrayManagerNS;
+using BinaryTreeManagerNS;
 
 namespace UIManagerNS
 {
@@ -33,6 +34,8 @@ namespace UIManagerNS
     public bool IsStaticArrayButtonActive => _activeButton == "staticArrayBtn";
 
     public bool IsDynamicArrayButtonActive => _activeButton == "dynamicArrayBtn";
+
+    public bool IsBinaryTreeButtonActive => _activeButton == "binaryTreeBtn";
 
     public UIManager(Font font, uint width, Window window)
     {
@@ -69,7 +72,15 @@ namespace UIManagerNS
       AddButton("Add Element", new Vector2f(1245, 85));          //17
       AddButton("Remove Element", new Vector2f(1245, 165));      //18
       AddButton(">", new Vector2f(1555, 5));                     //19
-      AddButton("<", new Vector2f(1555, 5));                     //20
+      AddButton("<", new Vector2f(5, 5));                        //20
+      AddButton("Binary Tree", new Vector2f(315, 5));            //21
+      AddButton("Go \nLeft", new Vector2f(315, 85), 145);        //22
+      AddButton("Go \nRight", new Vector2f(470, 85), 145);       //23
+      AddButton("Go \nUp", new Vector2f(315, 165), 300);         //24
+      AddButton("Add \nLeft", new Vector2f(315, 245), 145);      //25
+      AddButton("Add \nRight", new Vector2f(470, 245), 145);     //26
+      AddButton("Remove \nLeft", new Vector2f(315, 325), 145);   //27
+      AddButton("Remove \nRight", new Vector2f(470, 325), 145);  //28
     }
 
     private void CreateTextBoxes()
@@ -96,7 +107,7 @@ namespace UIManagerNS
       _buttonTexts.Add(buttonText);
     }
 
-    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager, DynamicArrayManager dynamicArrayManager)
+    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager, DynamicArrayManager dynamicArrayManager, BinaryTreeManager binaryTreeManager)
     {
       if (Mouse.IsButtonPressed(Mouse.Button.Left))
       {
@@ -136,6 +147,7 @@ namespace UIManagerNS
               screen++;
             }
             else
+
             if (_activeButton == "stackBtn")
             {
               if (_buttons[1].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
@@ -223,12 +235,14 @@ namespace UIManagerNS
                 dynamicArrayManager.RemoveElement();
               }
             }
+
           }
           _buttons[0].FillColor = _activeButton == "stackBtn" ? Color.Green : Color.White;
           _buttons[3].FillColor = _activeButton == "queueBtn" ? Color.Green : Color.White;
           _buttons[6].FillColor = _activeButton == "linkedListBtn" ? Color.Green : Color.White;
           _buttons[13].FillColor = _activeButton == "staticArrayBtn" ? Color.Green : Color.White;
           _buttons[16].FillColor = _activeButton == "dynamicArrayBtn" ? Color.Green : Color.White;
+
         }
         else if (screen == 2)
         {
@@ -238,7 +252,51 @@ namespace UIManagerNS
             {
               screen--;
             }
+            else
+            if (_buttons[21].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+            {
+              _activeButton = _activeButton != "binaryTreeBtn" ? "binaryTreeBtn" : "";
+            }
+            else if (_activeButton == "binaryTreeBtn")
+            {
+              if (_buttons[22].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                binaryTreeManager.GoLeft();
+              }
+              else
+              if (_buttons[23].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                binaryTreeManager.GoRight();
+              }
+              else
+              if (_buttons[24].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                binaryTreeManager.GoUp();
+              }
+              else
+              if (_buttons[25].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                binaryTreeManager.AddLeft();
+              }
+              else
+              if (_buttons[26].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                binaryTreeManager.AddRight();
+              }
+              else
+              if (_buttons[27].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                binaryTreeManager.RemoveLeft();
+              }
+              else
+              if (_buttons[28].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+              {
+                binaryTreeManager.RemoveRight();
+              }
+            }
+
           }
+          _buttons[21].FillColor = _activeButton == "binaryTreeBtn" ? Color.Green : Color.White;
         }
         _mouseDown = true;
       }
@@ -302,7 +360,12 @@ namespace UIManagerNS
       }
       else if (screen == 2)
       {
-        if (item == drawables[20])
+        if (item == drawables[20] || item == drawables[21])
+        {
+          return true;
+        }
+
+        if (_activeButton == "binaryTreeBtn" && (item == drawables[22] || item == drawables[23] || item == drawables[24] || item == drawables[25] || item == drawables[26] || item == drawables[27] || item == drawables[28]))
         {
           return true;
         }

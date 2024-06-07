@@ -6,6 +6,7 @@ using QueueManagerNS;
 using LinkedListManagerNS;
 using StaticArrayManagerNS;
 using DynamicArrayManagerNS;
+using BinaryTreeManagerNS;
 
 namespace SFMLNetExample
 {
@@ -31,12 +32,14 @@ namespace SFMLNetExample
 
       var dynamicArrayManager = new DynamicArrayManager(font, width);
 
+      var binaryTreeManager = new BinaryTreeManager(font, width);
+
       window.Closed += (sender, e) => window.Close();
 
       while (window.IsOpen)
       {
         window.DispatchEvents();
-        uiManager.HandleInput(window, stackManager, queueManager, linkedListManager, staticArrayManager, dynamicArrayManager);
+        uiManager.HandleInput(window, stackManager, queueManager, linkedListManager, staticArrayManager, dynamicArrayManager, binaryTreeManager);
         window.Clear(Color.Black);
         linkedListManager.DrawArrows(window, uiManager.IsLinkedListButtonActive);
         uiManager.Draw(window);
@@ -45,6 +48,7 @@ namespace SFMLNetExample
         linkedListManager.Draw(window, uiManager.IsLinkedListButtonActive);
         staticArrayManager.Draw(window, uiManager.IsStaticArrayButtonActive);
         dynamicArrayManager.Draw(window, uiManager.IsDynamicArrayButtonActive);
+        binaryTreeManager.Draw(window, uiManager.IsBinaryTreeButtonActive);
         window.Display();
       }
     }
