@@ -11,7 +11,7 @@ namespace QueueManagerNS
     private Queue<Text> _textDrawables;
     private int _queueLength;
 
-    public QueueManager(Font font, uint width)
+    public QueueManager(Font font)
     {
       _font = font;
       _queueDrawables = new Queue<RectangleShape>();

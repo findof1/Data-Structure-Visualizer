@@ -25,13 +25,13 @@ namespace SFMLNetExample
 
       var stackManager = new StackManager(font, width);
 
-      var queueManager = new QueueManager(font, width);
+      var queueManager = new QueueManager(font);
 
-      var linkedListManager = new LinkedListManager(font, width);
+      var linkedListManager = new LinkedListManager(font);
 
-      var staticArrayManager = new StaticArrayManager(font, width);
+      var staticArrayManager = new StaticArrayManager(font);
 
-      var dynamicArrayManager = new DynamicArrayManager(font, width);
+      var dynamicArrayManager = new DynamicArrayManager(font);
 
       var binaryTreeManager = new BinaryTreeManager(font, width);
 

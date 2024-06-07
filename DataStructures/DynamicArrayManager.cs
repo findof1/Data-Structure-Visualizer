@@ -11,7 +11,7 @@ namespace DynamicArrayManagerNS
     private int _arrSize;
     private int _currentMaxIndex;
 
-    public DynamicArrayManager(Font font, uint width)
+    public DynamicArrayManager(Font font)
     {
       _font = font;
       _currentMaxIndex = 1;

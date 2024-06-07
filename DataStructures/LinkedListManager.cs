@@ -11,7 +11,7 @@ namespace LinkedListManagerNS
     private LinkedList<Text> _textDrawables;
     private int _linkedListLength;
 
-    public LinkedListManager(Font font, uint width)
+    public LinkedListManager(Font font)
     {
       _font = font;
       _linkedListDrawables = new LinkedList<RectangleShape>();
@@ -386,7 +386,6 @@ namespace LinkedListManagerNS
         index++;
       }
     }
-
     public void Draw(RenderWindow window, bool isActive)
     {
       if (isActive)
