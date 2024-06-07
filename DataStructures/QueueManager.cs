@@ -7,7 +7,6 @@ namespace QueueManagerNS
   class QueueManager
   {
     private Font _font;
-    private uint _width;
     private Queue<RectangleShape> _queueDrawables;
     private Queue<Text> _textDrawables;
     private int _queueLength;
@@ -15,7 +14,6 @@ namespace QueueManagerNS
     public QueueManager(Font font, uint width)
     {
       _font = font;
-      _width = width;
       _queueDrawables = new Queue<RectangleShape>();
       _textDrawables = new Queue<Text>();
       _queueLength = 0;

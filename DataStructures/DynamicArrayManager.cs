@@ -6,7 +6,6 @@ namespace DynamicArrayManagerNS
   class DynamicArrayManager
   {
     private Font _font;
-    private uint _width;
     private RectangleShape[] _arrDrawables;
     private Text[] _textDrawables;
     private int _arrSize;
@@ -15,7 +14,6 @@ namespace DynamicArrayManagerNS
     public DynamicArrayManager(Font font, uint width)
     {
       _font = font;
-      _width = width;
       _currentMaxIndex = 1;
       _arrDrawables = new RectangleShape[20];
       _textDrawables = new Text[20];

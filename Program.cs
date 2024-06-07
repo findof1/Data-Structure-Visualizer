@@ -20,7 +20,7 @@ namespace SFMLNetExample
       window.SetFramerateLimit(60);
 
       var font = new Font("./Arial.ttf");
-      var uiManager = new UIManager(font, width, window);
+      var uiManager = new UIManager(font, window);
 
       var stackManager = new StackManager(font, width);
 

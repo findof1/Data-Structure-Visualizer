@@ -7,7 +7,6 @@ namespace LinkedListManagerNS
   class LinkedListManager
   {
     private Font _font;
-    private uint _width;
     private LinkedList<RectangleShape> _linkedListDrawables;
     private LinkedList<Text> _textDrawables;
     private int _linkedListLength;
@@ -15,7 +14,6 @@ namespace LinkedListManagerNS
     public LinkedListManager(Font font, uint width)
     {
       _font = font;
-      _width = width;
       _linkedListDrawables = new LinkedList<RectangleShape>();
       _textDrawables = new LinkedList<Text>();
       _linkedListLength = 0;

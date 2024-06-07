@@ -35,7 +35,6 @@ namespace BinaryTreeManagerNS
   class BinaryTreeManager
   {
     private Font _font;
-    private uint _width;
     private TreeNode _head;
     public TreeNode _currentNode;
     public int _currentDepth;
@@ -44,7 +43,6 @@ namespace BinaryTreeManagerNS
     public BinaryTreeManager(Font font, uint width)
     {
       _font = font;
-      _width = width;
       _head = new TreeNode(_font, 900, 400);
       _currentNode = _head;
       _currentDepth = 1;

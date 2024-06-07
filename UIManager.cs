@@ -11,36 +11,27 @@ using BinaryTreeManagerNS;
 
 namespace UIManagerNS
 {
-
   class UIManager
   {
     private Font _font;
-    private uint _width;
     private Window _window;
     private List<RectangleShape> _buttons;
     private List<TextBox> _textBoxes;
     private List<Drawable> _buttonTexts;
     private string? _activeButton;
     private bool _mouseDown;
-
     private int screen = 1;
 
     public bool IsStackButtonActive => _activeButton == "stackBtn";
-
     public bool IsQueueButtonActive => _activeButton == "queueBtn";
-
     public bool IsLinkedListButtonActive => _activeButton == "linkedListBtn";
-
     public bool IsStaticArrayButtonActive => _activeButton == "staticArrayBtn";
-
     public bool IsDynamicArrayButtonActive => _activeButton == "dynamicArrayBtn";
-
     public bool IsBinaryTreeButtonActive => _activeButton == "binaryTreeBtn";
 
-    public UIManager(Font font, uint width, Window window)
+    public UIManager(Font font, Window window)
     {
       _font = font;
-      _width = width;
       _window = window;
       _buttons = new List<RectangleShape>();
       _buttonTexts = new List<Drawable>();
@@ -109,200 +100,210 @@ namespace UIManagerNS
 
     public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager, DynamicArrayManager dynamicArrayManager, BinaryTreeManager binaryTreeManager)
     {
-      if (Mouse.IsButtonPressed(Mouse.Button.Left))
-      {
-        Vector2f mousePos = window.MapPixelToCoords(Mouse.GetPosition(window));
-        if (screen == 1)
-        {
-          if (!_mouseDown)
-          {
-            if (_buttons[0].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              _activeButton = _activeButton != "stackBtn" ? "stackBtn" : "";
-            }
-            else
-
-            if (_buttons[3].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              _activeButton = _activeButton != "queueBtn" ? "queueBtn" : "";
-            }
-            else
-
-            if (_buttons[6].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              _activeButton = _activeButton != "linkedListBtn" ? "linkedListBtn" : "";
-            }
-            else if (_buttons[13].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              _activeButton = _activeButton != "staticArrayBtn" ? "staticArrayBtn" : "";
-            }
-            else
-            if (_buttons[16].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              _activeButton = _activeButton != "dynamicArrayBtn" ? "dynamicArrayBtn" : "";
-            }
-            else
-            if (_buttons[19].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              screen++;
-            }
-            else
-
-            if (_activeButton == "stackBtn")
-            {
-              if (_buttons[1].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                stackManager.AddStack();
-              }
-              else
-
-              if (_buttons[2].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                stackManager.RemoveStack();
-              }
-            }
-            else
-            if (_activeButton == "queueBtn")
-            {
-              if (_buttons[4].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                queueManager.AddQueueItem();
-              }
-              else
-
-              if (_buttons[5].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                queueManager.RemoveQueueItem();
-              }
-            }
-            else
-            if (_activeButton == "linkedListBtn")
-            {
-              if (_buttons[7].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                linkedListManager.AddFirstLinkedListItem();
-              }
-              else
-
-              if (_buttons[8].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                linkedListManager.RemoveFirstLinkedListItem();
-              }
-              else
-
-              if (_buttons[9].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                linkedListManager.AddLastLinkedListItem();
-              }
-              else
-              if (_buttons[10].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                linkedListManager.RemoveLastLinkedListItem();
-              }
-              else
-
-              if (_buttons[11].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                linkedListManager.AddAfterLinkedListItem(_textBoxes[0].getText());
-              }
-              else
-              if (_buttons[12].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                linkedListManager.RemoveAfterLinkedListItem(_textBoxes[0].getText());
-              }
-            }
-            else if (_activeButton == "staticArrayBtn")
-            {
-              if (_buttons[14].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                staticArrayManager.AddElement();
-              }
-              else
-             if (_buttons[15].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                staticArrayManager.RemoveElement();
-              }
-            }
-            else if (_activeButton == "dynamicArrayBtn")
-            {
-              if (_buttons[17].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                dynamicArrayManager.AddElement();
-              }
-              else
-             if (_buttons[18].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                dynamicArrayManager.RemoveElement();
-              }
-            }
-
-          }
-          _buttons[0].FillColor = _activeButton == "stackBtn" ? Color.Green : Color.White;
-          _buttons[3].FillColor = _activeButton == "queueBtn" ? Color.Green : Color.White;
-          _buttons[6].FillColor = _activeButton == "linkedListBtn" ? Color.Green : Color.White;
-          _buttons[13].FillColor = _activeButton == "staticArrayBtn" ? Color.Green : Color.White;
-          _buttons[16].FillColor = _activeButton == "dynamicArrayBtn" ? Color.Green : Color.White;
-
-        }
-        else if (screen == 2)
-        {
-          if (!_mouseDown)
-          {
-            if (_buttons[20].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              screen--;
-            }
-            else
-            if (_buttons[21].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-            {
-              _activeButton = _activeButton != "binaryTreeBtn" ? "binaryTreeBtn" : "";
-            }
-            else if (_activeButton == "binaryTreeBtn")
-            {
-              if (_buttons[22].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                binaryTreeManager.GoLeft();
-              }
-              else
-              if (_buttons[23].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                binaryTreeManager.GoRight();
-              }
-              else
-              if (_buttons[24].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                binaryTreeManager.GoUp();
-              }
-              else
-              if (_buttons[25].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                binaryTreeManager.AddLeft();
-              }
-              else
-              if (_buttons[26].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                binaryTreeManager.AddRight();
-              }
-              else
-              if (_buttons[27].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                binaryTreeManager.RemoveLeft();
-              }
-              else
-              if (_buttons[28].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
-              {
-                binaryTreeManager.RemoveRight();
-              }
-            }
-
-          }
-          _buttons[21].FillColor = _activeButton == "binaryTreeBtn" ? Color.Green : Color.White;
-        }
-        _mouseDown = true;
-      }
-      else
+      if (!Mouse.IsButtonPressed(Mouse.Button.Left))
       {
         _mouseDown = false;
+        return;
+      }
+
+      if (_mouseDown)
+      {
+        return;
+      }
+
+      Vector2f mousePos = window.MapPixelToCoords(Mouse.GetPosition(window));
+
+      CheckMainButtonInput(mousePos);
+      UpdateButtonColors();
+      HandleScreenNavigation(mousePos);
+
+      if (screen == 1)
+      {
+        HandleStackActions(mousePos, stackManager);
+        HandleQueueActions(mousePos, queueManager);
+        HandleLinkedListActions(mousePos, linkedListManager);
+        HandleStaticArrayActions(mousePos, staticArrayManager);
+        HandleDynamicArrayActions(mousePos, dynamicArrayManager);
+      }
+      else if (screen == 2)
+      {
+        HandleBinaryTreeActions(mousePos, binaryTreeManager);
+      }
+
+      _mouseDown = true;
+    }
+
+    private void CheckMainButtonInput(Vector2f mousePos)
+    {
+      var buttonMappings = new Dictionary<int, string>
+            {
+                { 0, "stackBtn" },
+                { 3, "queueBtn" },
+                { 6, "linkedListBtn" },
+                { 13, "staticArrayBtn" },
+                { 16, "dynamicArrayBtn" },
+                { 21, "binaryTreeBtn" }
+            };
+
+      foreach (var mapping in buttonMappings)
+      {
+        if (_buttons[mapping.Key].GetGlobalBounds().Contains(mousePos.X, mousePos.Y) &&
+           ((screen == 1 && mapping.Key != 21) || (screen == 2 && mapping.Key == 21)))
+        {
+          _activeButton = _activeButton != mapping.Value ? mapping.Value : "";
+          break;
+        }
+      }
+    }
+
+    private void UpdateButtonColors()
+    {
+      var buttonColorMappings = new Dictionary<string, int>
+            {
+                { "stackBtn", 0 },
+                { "queueBtn", 3 },
+                { "linkedListBtn", 6 },
+                { "staticArrayBtn", 13 },
+                { "dynamicArrayBtn", 16 },
+                { "binaryTreeBtn", 21 }
+            };
+
+      foreach (var mapping in buttonColorMappings)
+      {
+        _buttons[mapping.Value].FillColor = _activeButton == mapping.Key ? Color.Green : Color.White;
+      }
+    }
+
+    private void HandleScreenNavigation(Vector2f mousePos)
+    {
+      if (_buttons[19].GetGlobalBounds().Contains(mousePos.X, mousePos.Y) && screen == 1)
+      {
+        screen++;
+      }
+
+      if (_buttons[20].GetGlobalBounds().Contains(mousePos.X, mousePos.Y) && screen == 2)
+      {
+        screen--;
+      }
+    }
+
+    private void HandleStackActions(Vector2f mousePos, StackManager stackManager)
+    {
+      if (_activeButton != "stackBtn") return;
+
+      if (_buttons[1].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        stackManager.AddStack();
+      }
+      else if (_buttons[2].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        stackManager.RemoveStack();
+      }
+    }
+
+    private void HandleQueueActions(Vector2f mousePos, QueueManager queueManager)
+    {
+      if (_activeButton != "queueBtn") return;
+
+      if (_buttons[4].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        queueManager.AddQueueItem();
+      }
+      else if (_buttons[5].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        queueManager.RemoveQueueItem();
+      }
+    }
+
+    private void HandleLinkedListActions(Vector2f mousePos, LinkedListManager linkedListManager)
+    {
+      if (_activeButton != "linkedListBtn") return;
+
+      if (_buttons[7].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        linkedListManager.AddFirstLinkedListItem();
+      }
+      else if (_buttons[8].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        linkedListManager.RemoveFirstLinkedListItem();
+      }
+      else if (_buttons[9].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        linkedListManager.AddLastLinkedListItem();
+      }
+      else if (_buttons[10].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        linkedListManager.RemoveLastLinkedListItem();
+      }
+      else if (_buttons[11].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        linkedListManager.AddAfterLinkedListItem(_textBoxes[0].getText());
+      }
+      else if (_buttons[12].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        linkedListManager.RemoveAfterLinkedListItem(_textBoxes[0].getText());
+      }
+    }
+
+    private void HandleStaticArrayActions(Vector2f mousePos, StaticArrayManager staticArrayManager)
+    {
+      if (_activeButton != "staticArrayBtn") return;
+
+      if (_buttons[14].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        staticArrayManager.AddElement();
+      }
+      else if (_buttons[15].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        staticArrayManager.RemoveElement();
+      }
+    }
+
+    private void HandleDynamicArrayActions(Vector2f mousePos, DynamicArrayManager dynamicArrayManager)
+    {
+      if (_activeButton != "dynamicArrayBtn") return;
+
+      if (_buttons[17].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        dynamicArrayManager.AddElement();
+      }
+      else if (_buttons[18].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        dynamicArrayManager.RemoveElement();
+      }
+    }
+
+    private void HandleBinaryTreeActions(Vector2f mousePos, BinaryTreeManager binaryTreeManager)
+    {
+      if (_activeButton != "binaryTreeBtn") return;
+
+      if (_buttons[22].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        binaryTreeManager.GoLeft();
+      }
+      else if (_buttons[23].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        binaryTreeManager.GoRight();
+      }
+      else if (_buttons[24].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        binaryTreeManager.GoUp();
+      }
+      else if (_buttons[25].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        binaryTreeManager.AddLeft();
+      }
+      else if (_buttons[26].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        binaryTreeManager.AddRight();
+      }
+      else if (_buttons[27].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        binaryTreeManager.RemoveLeft();
+      }
+      else if (_buttons[28].GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        binaryTreeManager.RemoveRight();
       }
     }
 
@@ -389,7 +390,7 @@ namespace UIManagerNS
     {
       foreach (TextBox textBox in _textBoxes ?? Enumerable.Empty<TextBox>())
       {
-        if (_activeButton == "linkedListBtn" && _textBoxes?[0] == textBox)
+        if (_activeButton == "linkedListBtn" && _textBoxes?[0] == textBox && screen == 1)
         {
           textBox.Draw(window);
         }

@@ -6,7 +6,6 @@ namespace StaticArrayManagerNS
   class StaticArrayManager
   {
     private Font _font;
-    private uint _width;
     private RectangleShape[] _stackDrawables;
     private Text[] _textDrawables;
     private int _arrSize;
@@ -14,7 +13,6 @@ namespace StaticArrayManagerNS
     public StaticArrayManager(Font font, uint width)
     {
       _font = font;
-      _width = width;
       _stackDrawables = new RectangleShape[5];
       _textDrawables = new Text[5];
       _arrSize = 0;
