@@ -32,7 +32,7 @@ namespace DynamicArrayManagerNS
         Position = new Vector2f(400 + (55 * (n - 1)), 800)
       };
 
-      var number = new Text($"null", _font);
+      var number = new Text($"null", _font, 20);
 
       number.FillColor = Color.Black;
       number.Position = new Vector2f(400 + (55 * (n - 1)) + number.GetGlobalBounds().Height / 3f, 800);
@@ -46,7 +46,7 @@ namespace DynamicArrayManagerNS
         if (_arrSize < _currentMaxIndex)
         {
           var rand = new Random();
-          var number = new Text($"{rand.Next(0, 20)}", _font);
+          var number = new Text($"{rand.Next(0, 20)}", _font, 20);
           number.FillColor = Color.Black;
           number.Position = _textDrawables[_arrSize].Position;
           _textDrawables[_arrSize] = number;
@@ -69,7 +69,7 @@ namespace DynamicArrayManagerNS
       if (_arrSize >= 1 && _arrSize > _currentMaxIndex / 2)
       {
 
-        var text = new Text("null", _font);
+        var text = new Text("null", _font, 20);
         text.FillColor = Color.Black;
         text.Position = _textDrawables[_arrSize - 1].Position;
         _textDrawables[_arrSize - 1] = text;
@@ -80,7 +80,7 @@ namespace DynamicArrayManagerNS
       {
         for (int i = _currentMaxIndex; i > _currentMaxIndex / 2; i--)
         {
-          _textDrawables[i] = new Text("", _font); ;
+          _textDrawables[i] = new Text("", _font, 20); ;
           _arrDrawables[i] = new RectangleShape(new Vector2f(0, 0));
         }
         _currentMaxIndex /= 2;
