@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SFMLTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67b35fd4ef2718614fc86744fbc30ac11e1bad76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b824932059ad44e23a361da2023f5b1d89e5e91")]
 [assembly: System.Reflection.AssemblyProductAttribute("SFMLTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SFMLTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

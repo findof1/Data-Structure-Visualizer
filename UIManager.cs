@@ -9,6 +9,7 @@ using StaticArrayManagerNS;
 using DynamicArrayManagerNS;
 using BinaryTreeManagerNS;
 using System.Collections.Generic;
+using HashTableManagerNS;
 
 namespace UIManagerNS
 {
@@ -48,7 +49,7 @@ namespace UIManagerNS
     public bool IsStaticArrayButtonActive => _activeButton == "staticArrayBtn";
     public bool IsDynamicArrayButtonActive => _activeButton == "dynamicArrayBtn";
     public bool IsBinaryTreeButtonActive => _activeButton == "binaryTreeBtn";
-
+    public bool IsHashTableButtonActive => _activeButton == "hashTableBtn";
     public UIManager(Font font, RenderWindow window)
     {
       _font = font;
@@ -91,6 +92,9 @@ namespace UIManagerNS
       AddButton("binaryTreeAddRight", "Add Right", new Vector2f(470, 245), new Vector2f(145, 75));
       AddButton("binaryTreeRemoveLeft", "Remove Left", new Vector2f(315, 325), new Vector2f(145, 75), 20);
       AddButton("binaryTreeRemoveRight", "Remove Right", new Vector2f(470, 325), new Vector2f(145, 75), 20);
+      AddButton("hashTableBtn", "Hash Table", new Vector2f(625, 5), new Vector2f(300, 75));
+      AddButton("hashTableAdd", "Add", new Vector2f(625, 85), new Vector2f(300, 75));
+      AddButton("hashTableRemove", "Remove", new Vector2f(625, 165), new Vector2f(300, 75));
     }
 
     private void CreateTextBoxes()
@@ -106,7 +110,7 @@ namespace UIManagerNS
       _buttons[id] = new UIButton(text, _font, position, size, fontSize);
     }
 
-    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager, DynamicArrayManager dynamicArrayManager, BinaryTreeManager binaryTreeManager)
+    public void HandleInput(RenderWindow window, StackManager stackManager, QueueManager queueManager, LinkedListManager linkedListManager, StaticArrayManager staticArrayManager, DynamicArrayManager dynamicArrayManager, BinaryTreeManager binaryTreeManager, HashTableManager hashTableManager)
     {
       if (!Mouse.IsButtonPressed(Mouse.Button.Left))
       {
@@ -133,6 +137,7 @@ namespace UIManagerNS
       else if (_screen == 2)
       {
         HandleBinaryTreeActions(mousePos, binaryTreeManager);
+        HandleHashTableActions(mousePos, hashTableManager);
       }
 
       _mouseDown = true;
@@ -140,23 +145,39 @@ namespace UIManagerNS
 
     private void CheckMainButtonInput(Vector2f mousePos)
     {
-      var buttonMappings = new Dictionary<string, string>
+      var buttonMappingsScreen1 = new Dictionary<string, string>
             {
                 { "stackBtn", "stackBtn" },
                 { "queueBtn", "queueBtn" },
                 { "linkedListBtn", "linkedListBtn" },
                 { "staticArrayBtn", "staticArrayBtn" },
-                { "dynamicArrayBtn", "dynamicArrayBtn" },
-                { "binaryTreeBtn", "binaryTreeBtn" }
+                { "dynamicArrayBtn", "dynamicArrayBtn" }
             };
-
-      foreach (var mapping in buttonMappings)
+      var buttonMappingsScreen2 = new Dictionary<string, string>
+            {
+                { "binaryTreeBtn", "binaryTreeBtn" },
+                { "hashTableBtn", "hashTableBtn" }
+            };
+      if (_screen == 1)
       {
-        if (_buttons[mapping.Key].Shape.GetGlobalBounds().Contains(mousePos.X, mousePos.Y) &&
-           ((_screen == 1 && mapping.Key != "binaryTreeBtn") || (_screen == 2 && mapping.Key == "binaryTreeBtn")))
+        foreach (var mapping in buttonMappingsScreen1)
         {
-          _activeButton = _activeButton != mapping.Value ? mapping.Value : "";
-          break;
+          if (_buttons[mapping.Key].Shape.GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+          {
+            _activeButton = _activeButton != mapping.Value ? mapping.Value : "";
+            break;
+          }
+        }
+      }
+      if (_screen == 2)
+      {
+        foreach (var mapping in buttonMappingsScreen2)
+        {
+          if (_buttons[mapping.Key].Shape.GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+          {
+            _activeButton = _activeButton != mapping.Value ? mapping.Value : "";
+            break;
+          }
         }
       }
     }
@@ -302,6 +323,21 @@ namespace UIManagerNS
       }
     }
 
+    private void HandleHashTableActions(Vector2f mousePos, HashTableManager hashTableManager)
+    {
+      if (_activeButton != "hashTableBtn") return;
+
+      if (_buttons["hashTableAdd"].Shape.GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        hashTableManager.Add();
+      }
+      else if (_buttons["hashTableRemove"].Shape.GetGlobalBounds().Contains(mousePos.X, mousePos.Y))
+      {
+        hashTableManager.Remove();
+      }
+
+    }
+
     public void Draw(RenderWindow window)
     {
       DrawButtons(window);
@@ -359,7 +395,7 @@ namespace UIManagerNS
       }
       else if (_screen == 2)
       {
-        if (button == _buttons["prevScreen"] || button == _buttons["binaryTreeBtn"])
+        if (button == _buttons["prevScreen"] || button == _buttons["binaryTreeBtn"] || button == _buttons["hashTableBtn"])
         {
           return true;
         }
@@ -368,6 +404,11 @@ namespace UIManagerNS
             button == _buttons["binaryTreeGoUp"] || button == _buttons["binaryTreeAddLeft"] ||
             button == _buttons["binaryTreeAddRight"] || button == _buttons["binaryTreeRemoveLeft"] ||
             button == _buttons["binaryTreeRemoveRight"]))
+        {
+          return true;
+        }
+
+        if (_activeButton == "hashTableBtn" && (button == _buttons["hashTableAdd"] || button == _buttons["hashTableRemove"]))
         {
           return true;
         }
